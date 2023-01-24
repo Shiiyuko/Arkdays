@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration monitorInterval="5">
+
+    <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+    <appenders>
+        <TerminalConsole name="TerminalConsoleAppender">
+            <PatternLayout pattern="%highlightError{[%d{yyyy-MM-dd HH:mm:ss} %level]: %minecraftFormatting{%msg}%n%xEx}" disableAnsi="${tca:disableAnsi}"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </TerminalConsole>
+    </appenders>
+    <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
+    <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <root level="info">
+            <appender-ref ref="TerminalConsoleAppender"/>
+        </root>
+    </loggers>
+</configuration>
